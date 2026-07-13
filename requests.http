@@ -1,0 +1,51 @@
+### Start a game
+POST http://localhost:8080/api/v1/games
+Content-Type: application/json
+
+{
+  "nickname": "Little Hero",
+  "animal": "PANDA",
+  "difficulty": "MEDIUM",
+  "mode": "NORMAL"
+}
+
+> {% client.global.set("gameId", response.body.sessionId); %}
+
+### Get current state
+GET http://localhost:8080/api/v1/games/{{gameId}}
+
+### Move one tile
+POST http://localhost:8080/api/v1/games/{{gameId}}/moves
+Content-Type: application/json
+
+{
+  "direction": "RIGHT"
+}
+
+### Use the buddy ability
+POST http://localhost:8080/api/v1/games/{{gameId}}/actions
+Content-Type: application/json
+
+{
+  "action": "USE_ABILITY"
+}
+
+### Drop a banana decoy
+POST http://localhost:8080/api/v1/games/{{gameId}}/actions
+Content-Type: application/json
+
+{
+  "action": "DROP_BANANA"
+}
+
+### Leaderboard
+GET http://localhost:8080/api/v1/leaderboard?limit=10
+
+### Today's medium daily challenge leaderboard
+GET http://localhost:8080/api/v1/leaderboard?limit=10&mode=DAILY&difficulty=MEDIUM
+
+### Game options
+GET http://localhost:8080/api/v1/game-options
+
+### Abandon game
+DELETE http://localhost:8080/api/v1/games/{{gameId}}

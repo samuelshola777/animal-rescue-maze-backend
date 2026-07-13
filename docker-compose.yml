@@ -1,0 +1,9 @@
+services:
+  animal-rescue-api:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      PORT: 8080
+      ALLOWED_ORIGINS: "http://localhost:*,https://*.vercel.app"
+    restart: unless-stopped
